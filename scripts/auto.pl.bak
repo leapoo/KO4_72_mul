@@ -1,0 +1,224 @@
+use Getopt::Long;
+
+my $file;
+my $position;
+my $o_file;
+
+print("Auto Generate Begin!\n");        
+
+GetOptions(
+		'file=s'	=> \$file,
+);
+
+if(!defined($file)){
+	die "Usage -file=seg_part_18to35_cal.v.tt"
+}
+
+$position = index($file,".tt");
+print("The index is $position \n");
+$o_file = substr($file,0,$position);
+print("The output file name is $o_file\n");
+
+print("Auto Generate Begin on $file \n");  
+
+my $width;
+my $flag;
+my @lines;
+my $width_inc;
+my $s1_1st_73;
+my $s1_1st_32;
+my $s1_2nd_73;
+my $s1_2nd_32;
+
+open(fh, $file) ||die;
+while(<fh>){
+
+	if(/module(\s+)seg_part\_(\d+)to(\d+)\_cal/){
+		$width = $3-$2+1;
+	}
+		#STEP1
+		if(/Step1 1st 7to3 compressor Auto Generate Code Begin/){
+		push @lines, $_;
+		$s1_1st_73=1;
+		for ($i=0;$i<$width;$i++){
+			if($i%3==0)
+			{
+					push @lines, "compressor_7to3	compressor_7to3_s1_1st_u$i	(.in0(row_0[$i]),	.in1(row_1[$i]),	.in2(row_2[$i]),.in3(row_3[$i]),	.in4(row_4[$i]),	.in5(row_5[$i]),	.in6(row_6[$i]),	.out0(pp_0_row_0[$i]),	.out1(pp_0_row_0[$i+1]),	.out2(pp_0_row_0[$i+2]));\n";	
+			}elsif($i%3==1){
+					push @lines, "compressor_7to3	compressor_7to3_s1_1st_u$i	(.in0(row_0[$i]),	.in1(row_1[$i]),	.in2(row_2[$i]),.in3(row_3[$i]),	.in4(row_4[$i]),	.in5(row_5[$i]),	.in6(row_6[$i]),	.out0(pp_0_row_1[$i]),	.out1(pp_0_row_1[$i+1]),	.out2(pp_0_row_1[$i+2]));\n";	
+			}
+			else
+			{
+					push @lines, "compressor_7to3	compressor_7to3_s1_1st_u$i	(.in0(row_0[$i]),	.in1(row_1[$i]),	.in2(row_2[$i]),.in3(row_3[$i]),	.in4(row_4[$i]),	.in5(row_5[$i]),	.in6(row_6[$i]),	.out0(pp_0_row_2[$i]),	.out1(pp_0_row_2[$i+1]),	.out2(pp_0_row_2[$i+2]));\n";	
+			}
+		}		
+				
+			$width_inc=$width_inc+2;
+
+		next;
+	}
+		if(/Step1 1st 3to2 compressor Auto Generate Code Begin/){
+		push @lines, $_;
+		$s1_1st_32=1;
+		for ($i=0;$i<$width;$i++){
+			if($i%2==0)
+			{
+					push @lines, "compressor_3to2	compressor_3to2_s1_1st_u$i	(.in0(row_0[$i]),	.in1(row_1[$i]),	.in2(row_2[$i]),	.out0(pp_0_row_0[$i]),	.out1(pp_0_row_0[$i+1]));\n";	
+			}
+			else
+			{
+					push @lines, "compressor_3to2	compressor_3to2_s1_1st_u$i	(.in0(row_0[$i]),	.in1(row_1[$i]),	.in2(row_2[$i]),	.out0(pp_0_row_1[$i]),	.out1(pp_0_row_1[$i+1]));\n";	
+			}
+		}	
+		$width_inc=$width_inc+1;	
+
+		next;
+	}
+	
+		if(/Step1 2nd 7to3 compressor Auto Generate Code Begin/){
+		push @lines, $_;
+				$s1_2nd_73=1;
+		for ($i=0;$i<$width;$i++){
+			if($i%3==0)
+			{
+					push @lines, "compressor_7to3	compressor_7to3_s1_2nd_u$i	(.in0(row_7[$i]),	.in1(row_8[$i]),	.in2(row_9[$i]),.in3(row_10[$i]),	.in4(row_11[$i]),	.in5(row_12[$i]),	.in6(row_13[$i]),	.out0(pp_0_row_3[$i]),	.out1(pp_0_row_3[$i+1]),	.out2(pp_0_row_3[$i+2]));\n";	
+			}elsif($i%3==1){
+					push @lines, "compressor_7to3	compressor_7to3_s1_2nd_u$i	(.in0(row_7[$i]),	.in1(row_8[$i]),	.in2(row_9[$i]),.in3(row_10[$i]),	.in4(row_11[$i]),	.in5(row_12[$i]),	.in6(row_13[$i]),	.out0(pp_0_row_4[$i]),	.out1(pp_0_row_4[$i+1]),	.out2(pp_0_row_4[$i+2]));\n";	
+			}
+			else
+			{
+					push @lines, "compressor_7to3	compressor_7to3_s1_2nd_u$i	(.in0(row_7[$i]),	.in1(row_8[$i]),	.in2(row_9[$i]),.in3(row_10[$i]),	.in4(row_11[$i]),	.in5(row_12[$i]),	.in6(row_13[$i]),	.out0(pp_0_row_5[$i]),	.out1(pp_0_row_5[$i+1]),	.out2(pp_0_row_5[$i+2]));\n";	
+			}
+		}		
+
+		next;
+	}
+		if(/Step1 2nd 3to2 compressor Auto Generate Code Begin/){
+		push @lines, $_;
+		$s1_2nd_32=1;
+		for ($i=0;$i<$width;$i++){
+			if($i%2==0)
+			{
+					if($s1_1st_73){
+						push @lines, "compressor_3to2	compressor_3to2_s1_2nd_u$i	(.in0(row_7[$i]),	.in1(row_8[$i]),	.in2(row_9[$i]),	.out0(pp_0_row_4[$i]),	.out1(pp_0_row_4[$i+1]));\n";	
+					}
+					if($s1_1st_32){
+						push @lines, "compressor_3to2	compressor_3to2_s1_2nd_u$i	(.in0(row_3[$i]),	.in1(row_4[$i]),	.in2(row_5[$i]),	.out0(pp_0_row_3[$i]),	.out1(pp_0_row_3[$i+1]));\n";	
+					}
+			}
+			else
+			{		if($s1_1st_73){
+						push @lines, "compressor_3to2	compressor_3to2_s1_2nd_u$i	(.in0(row_7[$i]),	.in1(row_8[$i]),	.in2(row_9[$i]),	.out0(pp_0_row_5[$i]),	.out1(pp_0_row_5[$i+1]));\n";	
+					}
+					if($s1_1st_32){
+						push @lines, "compressor_3to2	compressor_3to2_s1_2nd_u$i	(.in0(row_3[$i]),	.in1(row_4[$i]),	.in2(row_5[$i]),	.out0(pp_0_row_4[$i]),	.out1(pp_0_row_4[$i+1]));\n";	
+					}
+			}
+		}	
+	
+		next;
+	}	
+		if(/Step1 3rd 3to2 compressor Auto Generate Code Begin/){
+		push @lines, $_;
+		
+		for ($i=0;$i<$width;$i++){
+			if($i%2==0)
+			{		if($s2_2nd_73){
+					push @lines, "compressor_3to2	compressor_3to2_s1_3rd_u$i	(.in0(row_14[$i]),	.in1(row_15[$i]),	.in2(row_16[$i]),	.out0(pp_0_row_6[$i]),	.out1(pp_0_row_6[$i+1]));\n";	
+					}
+					if($s2_2nd_32){
+					push @lines, "compressor_3to2	compressor_3to2_s1_3rd_u$i	(.in0(row_10[$i]),	.in1(row_11[$i]),	.in2(row_12[$i]),	.out0(pp_0_row_5[$i]),	.out1(pp_0_row_5[$i+1]));\n";	
+					}
+			}
+			else
+			{		if($s2_2nd_73){
+					push @lines, "compressor_3to2	compressor_3to2_s1_3rd_u$i	(.in0(row_14[$i]),	.in1(row_15[$i]),	.in2(row_16[$i]),	.out0(pp_0_row_7[$i]),	.out1(pp_0_row_7[$i+1]));\n";	
+					}
+					if($s2_2nd_32){
+					push @lines, "compressor_3to2	compressor_3to2_s1_3rd_u$i	(.in0(row_10[$i]),	.in1(row_11[$i]),	.in2(row_12[$i]),	.out0(pp_0_row_6[$i]),	.out1(pp_0_row_6[$i+1]));\n";	
+					}
+			}
+		}	
+	
+		next;
+	}
+
+		#STEP2
+		if(/Step2 1st 7to3 compressor Auto Generate Code Begin/){
+		push @lines, $_;
+		
+		for ($i=0;$i<$width+$width_inc;$i++){
+			if($i%3==0)
+			{
+					push @lines, "compressor_7to3	compressor_7to3_s2_1st_u$i	(.in0(pp_0_row_0[$i]),	.in1(pp_0_row_1[$i]),	.in2(pp_0_row_2[$i]),.in3(pp_0_row_3[$i]),	.in4(pp_0_row_4[$i]),	.in5(pp_0_row_5[$i]),	.in6(pp_0_row_6[$i]),	.out0(pp_1_row_0[$i]),	.out1(pp_1_row_0[$i+1]),	.out2(pp_1_row_0[$i+2]));\n";	
+			}elsif($i%3==1){
+					push @lines, "compressor_7to3	compressor_7to3_s2_1st_u$i	(.in0(pp_0_row_0[$i]),	.in1(pp_0_row_1[$i]),	.in2(pp_0_row_2[$i]),.in3(pp_0_row_3[$i]),	.in4(pp_0_row_4[$i]),	.in5(pp_0_row_5[$i]),	.in6(pp_0_row_6[$i]),	.out0(pp_1_row_1[$i]),	.out1(pp_1_row_1[$i+1]),	.out2(pp_1_row_1[$i+2]));\n";	
+			}
+			else
+			{
+					push @lines, "compressor_7to3	compressor_7to3_s2_1st_u$i	(.in0(pp_0_row_0[$i]),	.in1(pp_0_row_1[$i]),	.in2(pp_0_row_2[$i]),.in3(pp_0_row_3[$i]),	.in4(pp_0_row_4[$i]),	.in5(pp_0_row_5[$i]),	.in6(pp_0_row_6[$i]),	.out0(pp_1_row_2[$i]),	.out1(pp_1_row_2[$i+1]),	.out2(pp_1_row_2[$i+2]));\n";	
+			}
+		}		
+			$width_inc=$width_inc+2;
+		next;
+	}
+	if(/Step2 1st 3to2 compressor Auto Generate Code Begin/){
+		push @lines, $_;
+	
+		for ($i=0;$i<$width+$width_inc;$i++){
+			if($i%2==0)
+			{
+					push @lines, "compressor_3to2	compressor_3to2_s2_1st_u$i	(.in0(pp_0_row_0[$i]),	.in1(pp_0_row_1[$i]),	.in2(pp_0_row_2[$i]),	.out0(pp_1_row_0[$i]),	.out1(pp_1_row_0[$i+1]));\n";	
+			}
+			else
+			{
+					push @lines, "compressor_3to2	compressor_3to2_s2_1st_u$i	(.in0(pp_0_row_0[$i]),	.in1(pp_0_row_1[$i]),	.in2(pp_0_row_2[$i]),	.out0(pp_1_row_1[$i]),	.out1(pp_1_row_1[$i+1]));\n";	
+			}
+		}	
+			$width_inc=$width_inc+1;	
+		next;
+	}
+			#STEP3
+		if(/Step3 1st 3to2 compressor Auto Generate Code Begin/){
+		push @lines, $_;
+
+		for ($i=0;$i<$width+$width_inc;$i++){
+			if($i%2==0)
+			{
+					push @lines, "compressor_3to2	compressor_3to2_s3_1st_u$i	(.in0(pp_1_row_0[$i]),	.in1(pp_1_row_1[$i]),	.in2(pp_1_row_2[$i]),	.out0(pp_2_row_0[$i]),	.out1(pp_2_row_0[$i+1]));\n";	
+			}
+			else
+			{
+					push @lines, "compressor_3to2	compressor_3to2_s3_1st_u$i	(.in0(pp_1_row_0[$i]),	.in1(pp_1_row_1[$i]),	.in2(pp_1_row_2[$i]),	.out0(pp_2_row_1[$i]),	.out1(pp_2_row_1[$i+1]));\n";	
+			}
+		}		
+			$width_inc=$width_inc+1;
+		next;
+	}
+		#STEP4
+		if(/Step4 1st 3to2 compressor Auto Generate Code Begin/){
+		push @lines, $_;
+
+		for ($i=0;$i<$width+$width_inc;$i++){
+			if($i%2==0)
+			{
+					push @lines, "compressor_3to2	compressor_3to2_s4_1st_u$i	(.in0(pp_2_row_0[$i]),	.in1(pp_2_row_1[$i]),	.in2(pp_2_row_2[$i]),	.out0(pp_3_row_0[$i]),	.out1(pp_3_row_0[$i+1]));\n";	
+			}
+			else
+			{
+					push @lines, "compressor_3to2	compressor_3to2_s4_1st_u$i	(.in0(pp_2_row_0[$i]),	.in1(pp_2_row_1[$i]),	.in2(pp_2_row_2[$i]),	.out0(pp_3_row_1[$i]),	.out1(pp_3_row_1[$i+1]));\n";	
+			}
+		}		
+			$width_inc=$width_inc+1;
+		next;
+	}
+		push @lines, $_;
+}
+close fh;
+print("The segment width is $width \n");
+
+open(fh_w,">../RTL/$o_file") ||die;
+print fh_w "@lines";
+close fh_w;
+
+

@@ -1,0 +1,95 @@
+`include "define.v" 
+
+module seg_part_36to53_cal (
+//input
+row_0,
+row_1,
+row_2,
+row_3,
+row_4,
+row_5,
+row_6,
+row_7,
+row_8,
+row_9,
+
+
+//output
+result
+
+);
+
+input [`DATA_WIDTH/`KO_PARAMETER-1:0] row_0;
+input [`DATA_WIDTH/`KO_PARAMETER-1:0] row_1;
+input [`DATA_WIDTH/`KO_PARAMETER-1:0] row_2;
+input [`DATA_WIDTH/`KO_PARAMETER-1:0] row_3;
+input [`DATA_WIDTH/`KO_PARAMETER-1:0] row_4;
+input [`DATA_WIDTH/`KO_PARAMETER-1:0] row_5;
+input [`DATA_WIDTH/`KO_PARAMETER-1:0] row_6;
+input [`DATA_WIDTH/`KO_PARAMETER-1:0] row_7;
+input [`DATA_WIDTH/`KO_PARAMETER-1:0] row_8;
+input [`DATA_WIDTH/`KO_PARAMETER-1:0] row_9;
+
+
+output [`DATA_WIDTH/`KO_PARAMETER-1+5:0] result;
+
+//For 1st  7to3 compressor
+wire	[`DATA_WIDTH/`KO_PARAMETER-1+2:0] pp_0_row_0  ;
+wire	[`DATA_WIDTH/`KO_PARAMETER-1+2:0] pp_0_row_1  ;
+wire	[`DATA_WIDTH/`KO_PARAMETER-1+2:0] pp_0_row_2  ;
+wire	[`DATA_WIDTH/`KO_PARAMETER-1+2:0] pp_0_row_3  ;
+wire	[`DATA_WIDTH/`KO_PARAMETER-1+2:0] pp_0_row_4  ;
+
+//For 2nd  3to2 compressor
+wire	[`DATA_WIDTH/`KO_PARAMETER-1+3:0] pp_1_row_0  ;
+wire	[`DATA_WIDTH/`KO_PARAMETER-1+3:0] pp_1_row_1  ;
+wire	[`DATA_WIDTH/`KO_PARAMETER-1+3:0] pp_1_row_2  ;
+
+//For 3rd  3to2 compressor
+wire	[`DATA_WIDTH/`KO_PARAMETER-1+4:0] pp_2_row_0  ;
+wire	[`DATA_WIDTH/`KO_PARAMETER-1+4:0] pp_2_row_1  ;
+wire	[`DATA_WIDTH/`KO_PARAMETER-1+4:0] pp_2_row_2  ;
+
+
+
+
+
+
+//Step1 1st 7to3 compressor Auto Generate Code Begin
+
+
+//Auto Generate Code End
+
+//Step1 2nd 3to2 compressor Auto Generate Code Begin
+
+
+//Auto Generate Code End
+
+assign pp_0_row_0 [`DATA_WIDTH/`KO_PARAMETER-1+2:`DATA_WIDTH/`KO_PARAMETER] = 0;
+assign pp_0_row_1 [`DATA_WIDTH/`KO_PARAMETER-1+2] = 0;
+assign pp_0_row_1 [0] = 0;
+assign pp_0_row_2 [1:0] = 0;
+assign pp_0_row_3 [`DATA_WIDTH/`KO_PARAMETER-1+2:`DATA_WIDTH/`KO_PARAMETER] = 0;
+assign pp_0_row_4 [`DATA_WIDTH/`KO_PARAMETER-1+2] = 0;
+assign pp_0_row_4 [0] = 0;
+
+//Step2 1st 3to2 compressor Auto Generate Code Begin
+
+//Auto Generate Code End
+
+assign pp_1_row_0[`DATA_WIDTH/`KO_PARAMETER-1+3]=0;
+assign pp_1_row_1[0] =0;
+assign pp_1_row_2 = pp_0_row_3+pp_0_row_4 ;
+
+
+//Step3 1st 3to2 compressor Auto Generate Code Begin
+
+//Auto Generate Code End
+
+assign pp_2_row_1[0] = 0;
+assign pp_2_row_1[`DATA_WIDTH/`KO_PARAMETER-1+4] =0;
+
+assign result = pp_2_row_0+pp_2_row_1;
+
+
+endmodule

@@ -1,0 +1,163 @@
+`include "define.v" 
+
+module seg_part_72to89_cal (
+//input
+row_0,
+row_1,
+row_2,
+row_3,
+row_4,
+row_5,
+row_6,
+row_7,
+row_8,
+row_9,
+row_10,
+row_11,
+row_12,
+row_13,
+row_14,
+row_15,
+row_16,
+row_17,
+row_18,
+
+
+
+//output
+result
+
+);
+
+input [`DATA_WIDTH/`KO_PARAMETER-1:0] row_0;
+input [`DATA_WIDTH/`KO_PARAMETER-1:0] row_1;
+input [`DATA_WIDTH/`KO_PARAMETER-1:0] row_2;
+input [`DATA_WIDTH/`KO_PARAMETER-1:0] row_3;
+input [`DATA_WIDTH/`KO_PARAMETER-1:0] row_4;
+input [`DATA_WIDTH/`KO_PARAMETER-1:0] row_5;
+input [`DATA_WIDTH/`KO_PARAMETER-1:0] row_6;
+input [`DATA_WIDTH/`KO_PARAMETER-1:0] row_7;
+input [`DATA_WIDTH/`KO_PARAMETER-1:0] row_8;
+input [`DATA_WIDTH/`KO_PARAMETER-1:0] row_9;
+input [`DATA_WIDTH/`KO_PARAMETER-1:0] row_10;
+input [`DATA_WIDTH/`KO_PARAMETER-1:0] row_11;  
+input [`DATA_WIDTH/`KO_PARAMETER-1:0] row_12;
+input [`DATA_WIDTH/`KO_PARAMETER-1:0] row_13;
+input [`DATA_WIDTH/`KO_PARAMETER-1:0] row_14;
+input [`DATA_WIDTH/`KO_PARAMETER-1:0] row_15;
+input [`DATA_WIDTH/`KO_PARAMETER-1:0] row_16;
+input [`DATA_WIDTH/`KO_PARAMETER-1:0] row_17;
+input [`DATA_WIDTH/`KO_PARAMETER-1:0] row_18;
+
+
+output [`DATA_WIDTH/`KO_PARAMETER-1+7:0] result;
+
+
+
+//For Step 1
+wire	[`DATA_WIDTH/`KO_PARAMETER-1+2:0] pp_0_row_0  ;
+wire	[`DATA_WIDTH/`KO_PARAMETER-1+2:0] pp_0_row_1  ;
+wire	[`DATA_WIDTH/`KO_PARAMETER-1+2:0] pp_0_row_2  ;
+wire	[`DATA_WIDTH/`KO_PARAMETER-1+2:0] pp_0_row_3  ;
+wire	[`DATA_WIDTH/`KO_PARAMETER-1+2:0] pp_0_row_4  ;
+wire	[`DATA_WIDTH/`KO_PARAMETER-1+2:0] pp_0_row_5  ;
+wire	[`DATA_WIDTH/`KO_PARAMETER-1+2:0] pp_0_row_6  ;
+wire	[`DATA_WIDTH/`KO_PARAMETER-1+2:0] pp_0_row_7  ;
+wire	[`DATA_WIDTH/`KO_PARAMETER-1+2:0] pp_0_row_8  ;
+wire	[`DATA_WIDTH/`KO_PARAMETER-1+2:0] pp_0_row_9  ;
+
+//For Step2
+//For 2nd  3to2 compressor
+wire	[`DATA_WIDTH/`KO_PARAMETER-1+4:0] pp_1_row_0  ;
+wire	[`DATA_WIDTH/`KO_PARAMETER-1+4:0] pp_1_row_1  ;
+wire	[`DATA_WIDTH/`KO_PARAMETER-1+4:0] pp_1_row_2  ;
+wire	[`DATA_WIDTH/`KO_PARAMETER-1+4:0] pp_1_row_3  ;
+wire	[`DATA_WIDTH/`KO_PARAMETER-1+4:0] pp_1_row_4  ;
+
+//For 3rd  3to2 compressor
+wire	[`DATA_WIDTH/`KO_PARAMETER-1+5:0] pp_2_row_0  ;
+wire	[`DATA_WIDTH/`KO_PARAMETER-1+5:0] pp_2_row_1  ;
+wire	[`DATA_WIDTH/`KO_PARAMETER-1+5:0] pp_2_row_2  ;
+
+
+//result
+wire	[`DATA_WIDTH/`KO_PARAMETER-1+6:0] pp_3_row_0  ;
+wire	[`DATA_WIDTH/`KO_PARAMETER-1+6:0] pp_3_row_1  ;
+
+
+
+
+
+//Step1 1st 7to3 compressor Auto Generate Code Begin
+
+
+//Auto Generate Code End
+
+//Step1 2nd 7to3 compressor Auto Generate Code Begin
+
+
+//Auto Generate Code End
+
+//Step1 3rd 3to2 compressor Auto Generate Code Begin
+
+
+//Auto Generate Code End
+
+
+assign pp_0_row_0 [`DATA_WIDTH/`KO_PARAMETER-1+2:`DATA_WIDTH/`KO_PARAMETER] = 0;
+assign pp_0_row_1 [`DATA_WIDTH/`KO_PARAMETER-1+2] = 0;
+assign pp_0_row_1 [0] = 0;
+assign pp_0_row_2 [1:0] = 0;
+assign pp_0_row_3 [`DATA_WIDTH/`KO_PARAMETER-1+2:`DATA_WIDTH/`KO_PARAMETER] = 0;
+assign pp_0_row_4 [`DATA_WIDTH/`KO_PARAMETER-1+2] = 0;
+assign pp_0_row_4 [0] = 0;
+assign pp_0_row_5 [1:0] = 0;
+assign pp_0_row_6 [`DATA_WIDTH/`KO_PARAMETER-1+2:`DATA_WIDTH/`KO_PARAMETER] = 0;
+assign pp_0_row_7 [`DATA_WIDTH/`KO_PARAMETER-1+2] = 0;
+assign pp_0_row_7 [0] = 0;
+assign pp_0_row_8 ={2'b0,row_17};
+assign pp_0_row_9 ={2'b0,row_18};
+
+
+
+
+//Step2 1st 7to3 compressor Auto Generate Code Begin
+
+//Auto Generate Code End
+
+//Step2 2nd 3to2 compressor Auto Generate Code Begin
+
+//Auto Generate Code End
+
+assign pp_1_row_0[`DATA_WIDTH/`KO_PARAMETER+3]=0;
+assign pp_1_row_1[0] =0;
+assign pp_1_row_2[1:0] = 0;
+assign pp_1_row_2[`DATA_WIDTH/`KO_PARAMETER+3:`DATA_WIDTH/`KO_PARAMETER+2] = 0;
+assign pp_1_row_3[`DATA_WIDTH/`KO_PARAMETER+3:`DATA_WIDTH/`KO_PARAMETER+2] = 0;
+assign pp_1_row_4[0]=0;
+assign pp_1_row_4[`DATA_WIDTH/`KO_PARAMETER+3]=0;
+
+
+//Step3 1st 3to2 compressor Auto Generate Code Begin
+
+//Auto Generate Code End
+
+
+assign pp_2_row_0[`DATA_WIDTH/`KO_PARAMETER+4]=0;
+assign pp_2_row_1[0]=0;
+assign pp_2_row_2= pp_1_row_3+pp_1_row_4;
+
+
+//Step4 1st 3to2 compressor Auto Generate Code Begin
+
+//Auto Generate Code End
+
+
+assign pp_3_row_1[0]=0;
+assign pp_3_row_1[`DATA_WIDTH/`KO_PARAMETER-1+6]=0;
+
+
+assign result = pp_3_row_0+pp_3_row_1;
+
+
+endmodule
